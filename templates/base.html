@@ -2,11 +2,20 @@
 <html lang="pt">
 
 <head>
-    <title>Início em Blog do Guilherme</title>
+    <title>{% block title %} {% endblock %}</title>
 
     {% include 'partials/_head.html' %}
 
+    <style>
+        .pagination{
+            margin-top: 12px;
+        }
+        
+    </style>
+
 </head>
+
+
 
 <body>
 
@@ -24,7 +33,6 @@
 </div>
 
 {% include 'partials/_footer.html' %}
-
 </body>
 
 </html>
