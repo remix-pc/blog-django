@@ -13,3 +13,6 @@ class Comment(models.Model):
     userComment = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     dateComment = models.DateTimeField(default=timezone.now)
     publishComment = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.nameComment
