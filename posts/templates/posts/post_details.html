@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %} {{ post.titlePost}} {% endblock %}
 
 {% block content %}
@@ -69,11 +71,9 @@
                 {% endfor %}
 
                 {% for visible_field in form.visible_fields %}
-                    <p>
-                        {{ visible_field.label_tag }} <br>
-                        {{ visible_field }}
-                        {{ visible_field.errors }}
-                    </p>
+                    
+                        {{ visible_field | as_crispy_field }}
+                    
                 {% endfor %}
                 
                 {% include 'partials/_messages.html' %}
