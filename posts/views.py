@@ -7,7 +7,6 @@ from comments.forms import FormComment
 from comments.models import Comment
 from django.contrib import messages
 
-
 # Create your views here.
 
 
@@ -20,6 +19,7 @@ class PostIndex(ListView):
 
     def get_queryset(self):
         qs = super().get_queryset()
+        qs = qs.select_related('category')
         qs.filter(publishPost=True)
         qs = qs.annotate(
             commentNumber = Count(

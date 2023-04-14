@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load humanize %}
+{% load omfilters %}
 
 {% block title %} Inicio {% endblock %}
 
@@ -27,7 +28,9 @@
             </h5>
             <p class="card-text">{{post.excerpt}}</p>
             <p class="card-text">
-                <small class="text-muted">{{ post.date |naturalday | title }} | {{ post.commentNumber }} comentário(s) | {{ post.category }}</small>
+                <small class="text-muted">{{ post.date |naturalday | title }} 
+                    | {{ post.commentNumber | plural_comments  }}
+                    | {{ post.category }}</small>
             </p>
 
             <div class="text-right">
