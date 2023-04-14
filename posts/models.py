@@ -2,6 +2,9 @@ from django.db import models
 from categories.models import Category
 from django.contrib.auth.models import User
 from django.utils import timezone
+from PIL import Image
+from django.conf import settings
+import os
 
 # Create your models here.
 
@@ -18,6 +21,28 @@ class Post(models.Model):
 
     def __str__(self):
         return self.titlePost
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        self.resize_image(self.imagePost.name, 800)
+
+    @staticmethod
+    def resize_image(imageName, newWidth):
+        imgPath = os.path.join(settings.MEDIA_ROOT, imageName)
+        img = Image.open(imgPath)
+        width, height = img.size
+        newHeight = round((newWidth * height) / width)
+
+        if width <= newWidth:
+            img.close()
+            return
+
+        newImage = img.resize((newWidth, newHeight), Image.ANTIALIAS)
+        newImage.save(imgPath, optimize=True, quality=60)
+
+        newImage.close()
+
 
     
 
